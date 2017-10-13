@@ -200,7 +200,6 @@ public class AdjGraph {
 
     public String[] calcShortestPath(String word) {
         EdgeNode ptr;
-        // Stack<String> path = new Stack<String>();
         int i, sum = 0, k, w;
         int start = wordsMap.get(word);
         for (i = 1; i <= n; i++) {

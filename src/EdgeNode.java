@@ -1,4 +1,4 @@
-
+// graph's edge node
 public class EdgeNode {
     // edge
     // node
