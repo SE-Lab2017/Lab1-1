@@ -126,6 +126,7 @@ public class AdjGraph {
     }
 
     public String generateNewText(String inputText) {
+        // generate new text with bridge words
         Scanner words = new Scanner(inputText);
         StringBuilder builder = new StringBuilder();
         String preWord = null;
@@ -199,7 +200,6 @@ public class AdjGraph {
 
     public String[] calcShortestPath(String word) {
         EdgeNode ptr;
-        // Stack<String> path = new Stack<String>();
         int i, sum = 0, k, w;
         int start = wordsMap.get(word);
         for (i = 1; i <= n; i++) {

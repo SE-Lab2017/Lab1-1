@@ -34,7 +34,6 @@ public class GraphIO {
         /*// query Bridge Words
         String s = G.queryBridgeWords("new","and");
         System.out.println(s);
-        // generate new text
         s = G.generateNewText("Seek to explore new and exciting synergies");
         System.out.println(s);
         // calculate Shortest Path
@@ -51,7 +50,6 @@ public class GraphIO {
             }
 
         }
-        // random walk
         System.out.print(G.randomWalk());
 
         // show graph
