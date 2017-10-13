@@ -1,4 +1,4 @@
-
+// graph's edge node
 public class EdgeNode {
     int adjVex;
     int cost;
