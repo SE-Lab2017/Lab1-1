@@ -126,6 +126,7 @@ public class AdjGraph {
     }
 
     public String generateNewText(String inputText) {
+        // generate new text with bridge words
         Scanner words = new Scanner(inputText);
         StringBuilder builder = new StringBuilder();
         String preWord = null;

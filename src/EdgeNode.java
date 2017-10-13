@@ -1,5 +1,7 @@
 
 public class EdgeNode {
+    // edge
+    // node
     int adjVex;
     int cost;
     EdgeNode next;

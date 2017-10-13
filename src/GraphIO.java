@@ -51,7 +51,6 @@ public class GraphIO {
             }
 
         }
-        // random walk
         System.out.print(G.randomWalk());
 
         // show graph
