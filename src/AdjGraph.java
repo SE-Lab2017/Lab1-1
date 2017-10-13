@@ -281,6 +281,7 @@ public class AdjGraph {
     }
 
     private void randomWalk(int start) {
+        // random walk
         EdgeNode p;
         int i = edgeNum[start], j = 1;
         if (i != 0) {

@@ -173,9 +173,6 @@ class GuiFrame extends JFrame
 
 class ImageViewer extends JComponent {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 7329313876812878327L;
     final JSlider slider;
     final ImageComponent image;
