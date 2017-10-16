@@ -19,7 +19,6 @@ public class AdjGraph {
     public AdjGraph() {
         vexList = null;
         n = 0;
-        // e = 0;
         d = new int[MAX];
         s = new boolean[MAX];
         p = new int[MAX];
