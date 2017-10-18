@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class AdjGraph {
-  private static final int MAX = 100;
+  private static final int MAX = 2000;
   private VertexNode[] vexList;
   private int vertexNum;
   private int[] dis;
