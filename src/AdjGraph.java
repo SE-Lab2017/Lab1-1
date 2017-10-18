@@ -57,9 +57,7 @@ public class AdjGraph {
     }
 
     public void insNode(String vexData) {
-        if (wordsMap.containsKey(vexData))
-            return;
-        else {
+        if (!wordsMap.containsKey(vexData)) {
             VertexNode[] newVexList;
             newVexList = new VertexNode[n + 2];
             for (int i = 1; i <= n + 1; i++) {

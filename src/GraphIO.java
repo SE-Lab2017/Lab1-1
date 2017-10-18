@@ -84,7 +84,7 @@ public class GraphIO {
                     }
                 } 
                 for (p = G.getFirstAdjvex(i); p != null; p = p.next) {
-                    if (str.indexOf(G.getVexData(i) + " " + G.getVexData(p.adjVex))!=-1) {
+                    if (str.contains(G.getVexData(i) + " " + G.getVexData(p.adjVex))) {
                         gv.addln(G.getVexData(i) + "->" + G.getVexData(p.adjVex) + "[label=" + p.cost
                                 + ",color=blue,fontcolor=blue]" + ";");
                     } else {
