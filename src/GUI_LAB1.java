@@ -47,25 +47,25 @@ class GuiFrame extends JFrame
         setBounds(700,100,400,800);
         //this.setResizable(false);
         setLayout(new BorderLayout());
-        //ÉèÖÃÍ¼±ê
-        Image img1 = new ImageIcon("G:\\BaiduYunDownload\\Í¼Æ¬\\th.jpg").getImage();
+        //è®¾ç½®å›¾æ ‡
+        Image img1 = new ImageIcon("G:\\BaiduYunDownload\\å›¾ç‰‡\\th.jpg").getImage();
         setIconImage(img1);
-        //ÉèÖÃ±³¾°
+        //è®¾ç½®èƒŒæ™¯
         background = new JLabel();
         
-        Image img_background = new ImageIcon("G:\\BaiduYunDownload\\Í¼Æ¬\\eva.jpg").getImage();
+        Image img_background = new ImageIcon("G:\\BaiduYunDownload\\å›¾ç‰‡\\eva.jpg").getImage();
         background.setIcon(new ImageIcon(img_background));
-        //ÉèÖÃ°´Å¥
+        //è®¾ç½®æŒ‰é’®
         func_area = new JPanel();
         func_area.setLayout(new GridLayout(6,1));
-        func1 = new JButton("¶ÁÈëÎÄ¼şÉú³ÉÓĞÏòÍ¼");
+        func1 = new JButton("è¯»å…¥æ–‡ä»¶ç”Ÿæˆæœ‰å‘å›¾");
         func1.setBounds(0, 100, 200, 100);                                                                                               
         func1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 JFileChooser dlg = new JFileChooser();
-                int result = dlg.showOpenDialog(null);  // "´ò¿ªÎÄ¼ş"¶Ô»°¿ò
+                int result = dlg.showOpenDialog(null);  // "æ‰“å¼€æ–‡ä»¶"å¯¹è¯æ¡†
                 if (result == JFileChooser.APPROVE_OPTION) 
                 {
                     //File file = dlg.getSelectedFile();
@@ -82,13 +82,13 @@ class GuiFrame extends JFrame
             }
         });
         
-        func2 = new JButton("Õ¹Ê¾ÓĞÏòÍ¼");
+        func2 = new JButton("å±•ç¤ºæœ‰å‘å›¾");
         func2.setBounds(0, 200, 200, 100);
         func2.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
-                JFrame frame = new JFrame("Õ¹Ê¾ÓĞÏòÍ¼");
+                JFrame frame = new JFrame("å±•ç¤ºæœ‰å‘å›¾");
                 ImageViewer imageViewer = null;
                 try {
                     imageViewer = new ImageViewer("C:\\Users\\zhang\\Desktop\\out.gif");
@@ -103,41 +103,41 @@ class GuiFrame extends JFrame
                 frame.setVisible(true);
             }
         });
-        func3 = new JButton("²éÑ¯ÇÅ½Ó´Ê");
+        func3 = new JButton("æŸ¥è¯¢æ¡¥æ¥è¯");
         func3.setBounds(0, 300, 200, 100);
         func3.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 bridgeWordsFrame frame = new bridgeWordsFrame();
-                frame.setTitle("²éÑ¯ÇÅ½Ó´Ê");
+                frame.setTitle("æŸ¥è¯¢æ¡¥æ¥è¯");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 300);
                 frame.setVisible(true);
             }
         });
-        func4 = new JButton("Éú³ÉĞÂÎÄ±¾");
+        func4 = new JButton("ç”Ÿæˆæ–°æ–‡æœ¬");
         func4.setBounds(0, 400, 200, 100);
         func4.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 NewTextFrame frame = new NewTextFrame();
-                frame.setTitle("Éú³ÉĞÂÎÄ±¾");
+                frame.setTitle("ç”Ÿæˆæ–°æ–‡æœ¬");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 300);
                 frame.setVisible(true);
             }
         });
-        func5 = new JButton("×î¶ÌÂ·¾¶");
+        func5 = new JButton("æœ€çŸ­è·¯å¾„");
         func5.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 ShortestFrame frame = new ShortestFrame();
-                frame.setTitle("×î¶ÌÂ·¾¶");
+                frame.setTitle("æœ€çŸ­è·¯å¾„");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 300);
@@ -145,21 +145,21 @@ class GuiFrame extends JFrame
             }
         });
         func5.setBounds(0, 500, 200, 100);
-        func6 = new JButton("Ëæ»úÓÎ×ß");
+        func6 = new JButton("éšæœºæ¸¸èµ°");
         func6.setBounds(0, 600, 200, 100);
         func6.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 RandomFrame frame = new RandomFrame();
-                frame.setTitle("Ëæ»úÓÎ×ß");
+                frame.setTitle("éšæœºæ¸¸èµ°");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(400, 300);
                 frame.setVisible(true);
             }
         });
-        //×é¼şÌî½øÈİÆ÷
+        //ç»„ä»¶å¡«è¿›å®¹å™¨
         func_area.add(func1);
         func_area.add(func2);
         func_area.add(func3);
@@ -244,9 +244,9 @@ class bridgeWordsFrame extends JFrame
 
       JPanel northPanel = new JPanel();
       northPanel.setLayout(new GridLayout(0, 2));
-      northPanel.add(new JLabel("µ¥´Ê1: ", SwingConstants.RIGHT));
+      northPanel.add(new JLabel("å•è¯1: ", SwingConstants.RIGHT));
       northPanel.add(textField1);
-      northPanel.add(new JLabel("µ¥´Ê2: ", SwingConstants.RIGHT));
+      northPanel.add(new JLabel("å•è¯2: ", SwingConstants.RIGHT));
       northPanel.add(textField2);
 
       add(northPanel, BorderLayout.NORTH);
@@ -258,7 +258,7 @@ class bridgeWordsFrame extends JFrame
 
       JPanel southPanel = new JPanel();
 
-      JButton serchtButton = new JButton("¿ªÊ¼²éÑ¯");
+      JButton serchtButton = new JButton("å¼€å§‹æŸ¥è¯¢");
       southPanel.add(serchtButton);
       serchtButton.addActionListener(new ActionListener()
          {
@@ -291,7 +291,7 @@ class NewTextFrame extends JFrame
 
       JPanel northPanel = new JPanel();
       northPanel.setLayout(new GridLayout(0, 2));
-      northPanel.add(new JLabel("ÊäÈëÎÄ±¾: ", SwingConstants.RIGHT));
+      northPanel.add(new JLabel("è¾“å…¥æ–‡æœ¬: ", SwingConstants.RIGHT));
       northPanel.add(textField1);
       add(northPanel, BorderLayout.NORTH);
 
@@ -302,7 +302,7 @@ class NewTextFrame extends JFrame
 
       JPanel southPanel = new JPanel();
 
-      JButton createButton = new JButton("Éú³ÉÎÄ±¾");
+      JButton createButton = new JButton("ç”Ÿæˆæ–‡æœ¬");
       southPanel.add(createButton);
       createButton.addActionListener(new ActionListener()
          {
@@ -334,9 +334,9 @@ class ShortestFrame extends JFrame
 
       JPanel northPanel = new JPanel();
       northPanel.setLayout(new GridLayout(0, 2));
-      northPanel.add(new JLabel("Æğµã: ", SwingConstants.RIGHT));
+      northPanel.add(new JLabel("èµ·ç‚¹: ", SwingConstants.RIGHT));
       northPanel.add(textField1);
-      northPanel.add(new JLabel("ÖÕµã: ", SwingConstants.RIGHT));
+      northPanel.add(new JLabel("ç»ˆç‚¹: ", SwingConstants.RIGHT));
       northPanel.add(textField2);
 
       add(northPanel, BorderLayout.NORTH);
@@ -348,7 +348,7 @@ class ShortestFrame extends JFrame
 
       JPanel southPanel = new JPanel();
 
-      JButton Button = new JButton("Éú³É×î¶ÌÂ·¾¶");
+      JButton Button = new JButton("ç”Ÿæˆæœ€çŸ­è·¯å¾„");
       southPanel.add(Button);
       Button.addActionListener(new ActionListener()
     {
@@ -400,7 +400,7 @@ class RandomFrame extends JFrame
 
       JPanel northPanel = new JPanel();
       northPanel.setLayout(new GridLayout(0, 2));
-      northPanel.add(new JLabel("Æğµã: ", SwingConstants.RIGHT));
+      northPanel.add(new JLabel("èµ·ç‚¹: ", SwingConstants.RIGHT));
       northPanel.add(textField1);
       add(northPanel, BorderLayout.NORTH);*/
 
@@ -411,7 +411,7 @@ class RandomFrame extends JFrame
 
       JPanel southPanel = new JPanel();
 
-      JButton rButton = new JButton("Ëæ»úÓÎ×ß");
+      JButton rButton = new JButton("éšæœºæ¸¸èµ°");
       southPanel.add(rButton);
       rButton.addActionListener(new ActionListener()
          {
