@@ -91,7 +91,7 @@ class GuiFrame extends JFrame
                 JFrame frame = new JFrame("展示有向图");
                 ImageViewer imageViewer = null;
                 try {
-                    imageViewer = new ImageViewer("C:\\Users\\zhang\\Desktop\\out.gif");
+                    imageViewer = new ImageViewer(System.getProperty("user.home") + "\\AppData\\Local\\Temp" + "\\out.gif");
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

@@ -144,7 +144,7 @@ public class GraphIO {
         gv.addln(gv.end_graph());
         System.out.println(gv.getDotSource());
         String type = "gif";
-        File out = new File("C:\\Users\\zhang\\Desktop\\out." + type); // Windows
+        File out = new File(System.getProperty("user.home") + "\\AppData\\Local\\Temp" + "\\out." + type); // Windows
         gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type), out);
     }
 }

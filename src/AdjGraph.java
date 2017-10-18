@@ -273,7 +273,7 @@ public class AdjGraph {
         randomWalk(start);
         String randomPath = randomPathBuilder.toString();
         randomPath = randomPath.substring(0, randomPath.length() - 1);
-        File f = new File("C:\\Users\\zhang\\Desktop\\randomwalk.txt");
+        File f = new File(System.getProperty("user.home") + "\\AppData\\Local\\Temp" + "randomwalk.txt");
         PrintStream fps = new PrintStream(f);
         fps.print(randomPath);
         fps.close();
