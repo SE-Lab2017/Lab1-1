@@ -1,3 +1,5 @@
+package lab1;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -14,18 +16,10 @@ import javax.swing.JPanel;
 
 class GuiFrame extends JFrame {
   private static final long serialVersionUID = 1L;
-  private JLabel background;
-  private JPanel funcArea;
-  private JButton func1;
-  private JButton func2;
-  private JButton func3;
-  private JButton func4;
-  private JButton func5;
-  private JButton func6;
 
   public GuiFrame() {
     //Container content = getContentPane();
-    setTitle("GuiLab1");
+    setTitle("Lab1");
     setBounds(700, 100, 400, 800);
     //this.setResizable(false);
     setLayout(new BorderLayout());
@@ -33,14 +27,14 @@ class GuiFrame extends JFrame {
     Image img1 = new ImageIcon("adjGraph:\\BaiduYunDownload\\图片\\th.jpg").getImage();
     setIconImage(img1);
     //设置背景
-    background = new JLabel();
+    JLabel background = new JLabel();
 
     Image imgBackground = new ImageIcon("adjGraph:\\BaiduYunDownload\\图片\\eva.jpg").getImage();
     background.setIcon(new ImageIcon(imgBackground));
     //设置按钮
-    funcArea = new JPanel();
+    JPanel funcArea = new JPanel();
     funcArea.setLayout(new GridLayout(6, 1));
-    func1 = new JButton("读入文件生成有向图");
+    JButton func1 = new JButton("读入文件生成有向图");
     func1.setBounds(0, 100, 200, 100);
     func1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
@@ -48,11 +42,11 @@ class GuiFrame extends JFrame {
         int result = dlg.showOpenDialog(null);  // "打开文件"对话框
         if (result == JFileChooser.APPROVE_OPTION) {
           //File file = dlg.getSelectedFile();
-          GuiLab1.GG.fileUrl = dlg.getSelectedFile().getAbsolutePath();
+          GuiLab1.graphIo.fileUrl = dlg.getSelectedFile().getAbsolutePath();
           try {
-            GuiLab1.GG.read();
-            GuiLab1.GG.showDirectedGraph(GuiLab1.GG.adjGraph, 0, "");
-            //GuiLab1.GG.showDirectedGraph(adjGraph,"");
+            GuiLab1.graphIo.read();
+            GuiLab1.graphIo.showDirectedGraph(GuiLab1.graphIo.adjGraph, 0, "");
+            //lab1.GuiLab1.graphIo.showDirectedGraph(adjGraph,"");
           } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -61,7 +55,7 @@ class GuiFrame extends JFrame {
       }
     });
 
-    func2 = new JButton("展示有向图");
+    JButton func2 = new JButton("展示有向图");
     func2.setBounds(0, 200, 200, 100);
     func2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
@@ -81,7 +75,7 @@ class GuiFrame extends JFrame {
         frame.setVisible(true);
       }
     });
-    func3 = new JButton("查询桥接词");
+    JButton func3 = new JButton("查询桥接词");
     func3.setBounds(0, 300, 200, 100);
     func3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
@@ -93,7 +87,7 @@ class GuiFrame extends JFrame {
         frame.setVisible(true);
       }
     });
-    func4 = new JButton("生成新文本");
+    JButton func4 = new JButton("生成新文本");
     func4.setBounds(0, 400, 200, 100);
     func4.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
@@ -105,7 +99,7 @@ class GuiFrame extends JFrame {
         frame.setVisible(true);
       }
     });
-    func5 = new JButton("最短路径");
+    JButton func5 = new JButton("最短路径");
     func5.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
         ShortestFrame frame = new ShortestFrame();
@@ -117,7 +111,7 @@ class GuiFrame extends JFrame {
       }
     });
     func5.setBounds(0, 500, 200, 100);
-    func6 = new JButton("随机游走");
+    JButton func6 = new JButton("随机游走");
     func6.setBounds(0, 600, 200, 100);
     func6.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {

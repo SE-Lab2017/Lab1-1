@@ -1,3 +1,5 @@
+package lab1;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -44,21 +46,21 @@ class ShortestFrame extends JFrame {
     spButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
         if (textField1.getText() != null && textField2.getText().equals("")) {
-          String[] paths = GuiLab1.GG.adjGraph.calcShortestPath(textField1.getText());
-          for (int i = 1; i <= GuiLab1.GG.adjGraph.getNumOfVertex(); i++) {
-            if (i != GuiLab1.GG.adjGraph.getIndexOfVex(textField1.getText())) {
+          String[] paths = GuiLab1.graphIo.adjGraph.calcShortestPath(textField1.getText());
+          for (int i = 1; i <= GuiLab1.graphIo.adjGraph.getNumOfVertex(); i++) {
+            if (i != GuiLab1.graphIo.adjGraph.getIndexOfVex(textField1.getText())) {
               textArea.append(paths[i] + " ");
-              textArea.append(String.valueOf(GuiLab1.GG.adjGraph
-                                              .getDistanceOfPath(GuiLab1.GG.adjGraph
+              textArea.append(String.valueOf(GuiLab1.graphIo.adjGraph
+                                              .getDistanceOfPath(GuiLab1.graphIo.adjGraph
                                                                   .getVexData(i))));
               textArea.append(System.lineSeparator());
             }
           }
         } else {
-          GuiLab1.GG.showDirectedGraph(GuiLab1.GG.adjGraph, 2,
-                                        GuiLab1.GG.adjGraph.calcShortestPath(textField1.getText(),
+          GuiLab1.graphIo.showDirectedGraph(GuiLab1.graphIo.adjGraph, 2,
+                                        GuiLab1.graphIo.adjGraph.calcShortestPath(textField1.getText(),
                                         textField2.getText()));
-          textArea.append(GuiLab1.GG.adjGraph.calcShortestPath(textField1.getText(),
+          textArea.append(GuiLab1.graphIo.adjGraph.calcShortestPath(textField1.getText(),
                           textField2.getText()) + System.lineSeparator());
         }
       }

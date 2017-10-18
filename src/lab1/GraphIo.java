@@ -1,3 +1,5 @@
+package lab1;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -38,7 +40,7 @@ public class GraphIo {
   public void showDirectedGraph(AdjGraph graph, int pattern, String str) {
     EdgeNode p;
     GraphViz gv = new GraphViz();
-    gv.addln(gv.start_graph());
+    gv.addln(gv.startGraph());
     String[] strSplit = str.split(" ");
     if (pattern == 2 && strSplit.length > 0) {
 
@@ -108,7 +110,7 @@ public class GraphIo {
         }
       }
     }
-    gv.addln(gv.end_graph());
+    gv.addln(gv.endGraph());
     System.out.println(gv.getDotSource());
     String type = "gif";
     File out = new File(System.getProperty("user.home")

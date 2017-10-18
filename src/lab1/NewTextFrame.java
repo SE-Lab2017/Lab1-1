@@ -1,3 +1,5 @@
+package lab1;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,25 +13,21 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-class BridgeWordsFrame extends JFrame {
+class NewTextFrame extends JFrame {
   public static final int TEXTAREA_ROWS = 8;
   public static final int TEXTAREA_COLUMNS = 20;
   /**
    *
    */
-  private static final long serialVersionUID = -6997430244984473897L;
+  private static final long serialVersionUID = -9094412266398525746L;
 
-  public BridgeWordsFrame() {
+  public NewTextFrame() {
     final JTextField textField1 = new JTextField();
-    final JTextField textField2 = new JTextField();
 
     JPanel northPanel = new JPanel();
     northPanel.setLayout(new GridLayout(0, 2));
-    northPanel.add(new JLabel("单词1: ", SwingConstants.RIGHT));
+    northPanel.add(new JLabel("输入文本: ", SwingConstants.RIGHT));
     northPanel.add(textField1);
-    northPanel.add(new JLabel("单词2: ", SwingConstants.RIGHT));
-    northPanel.add(textField2);
-
     add(northPanel, BorderLayout.NORTH);
 
     final JTextArea textArea = new JTextArea(TEXTAREA_ROWS, TEXTAREA_COLUMNS);
@@ -39,17 +37,13 @@ class BridgeWordsFrame extends JFrame {
 
     JPanel southPanel = new JPanel();
 
-    JButton serchtButton = new JButton("开始查询");
-    southPanel.add(serchtButton);
-    serchtButton.addActionListener(new ActionListener() {
+    JButton createButton = new JButton("生成文本");
+    southPanel.add(createButton);
+    createButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
-        String tmp = GuiLab1.GG.adjGraph
-                      .queryBridgeWords(textField1.getText(), textField2.getText());
-        textArea.append("The bridge words from " + textField1.getText() + " to "
-                        + textField2.getText() + " is:" + tmp + System.lineSeparator());
-        GuiLab1.GG.showDirectedGraph(GuiLab1.GG.adjGraph, 1,
-                                      textField1.getText()
-                                          + " " + tmp + " " + textField2.getText());
+
+        textArea.append(GuiLab1.graphIo.adjGraph.generateNewText(textField1.getText())
+                        + System.lineSeparator());
       }
     });
 

@@ -1,8 +1,10 @@
+package lab1;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 public class GuiLab1 {
-  static GraphIo GG = new GraphIo();
+  public static final GraphIo graphIo = new GraphIo();
 
   public static void main(String[] args) {
 

@@ -1,3 +1,5 @@
+package lab1;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

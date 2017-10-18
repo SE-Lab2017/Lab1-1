@@ -1,3 +1,5 @@
+package lab1;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -173,10 +175,11 @@ public class AdjGraph {
       dis[ptr.adjVex] = ptr.cost;
     }
     isVisited[start] = true;
+    StringBuilder builder = new StringBuilder();
     for (i = 1; i < vertexNum; i++) {
       w = getVexOfMinCost();
       if (w == end) {
-        StringBuilder builder = new StringBuilder();
+        builder.delete(0, builder.length());
         k = w;
         do {
           k = parentNode[k];
@@ -235,11 +238,9 @@ public class AdjGraph {
       }
     }
     String[] paths = new String[vertexNum + 1];
-    StringBuilder[] builder = new StringBuilder[vertexNum + 1];
+    StringBuilder builder = new StringBuilder();
     for (i = 1; i <= vertexNum; i++) {
-      builder[i] = new StringBuilder();
-    }
-    for (i = 1; i <= vertexNum; i++) {
+      builder.delete(0, builder.length());
       if (i != start) {
         k = i;
         Stack<String> tmp = new Stack<String>();
@@ -249,11 +250,11 @@ public class AdjGraph {
         } while (k != start);
 
         while (!tmp.isEmpty()) {
-          builder[i].append(tmp.pop()).append(' ');
+          builder.append(tmp.pop()).append(' ');
         }
-        builder[i].append(vexList[i].data);
+        builder.append(vexList[i].data);
       }
-      paths[i] = builder[i].toString();
+      paths[i] = builder.toString();
     }
     return paths;
   }

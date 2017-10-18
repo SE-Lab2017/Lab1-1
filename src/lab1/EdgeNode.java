@@ -1,3 +1,5 @@
+package lab1;
+
 public class EdgeNode {
   int adjVex;
   int cost;

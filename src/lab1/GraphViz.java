@@ -1,4 +1,4 @@
-// GraphViz.java - a simple API to call dot from Java programs
+package lab1;// lab1.GraphViz.java - a simple API to call dot from Java programs
 /*$Id$*/
 /*
  ******************************************************************************
@@ -33,7 +33,7 @@ import java.io.OutputStreamWriter;
 
 /**
  * <dl>
- * <dt>Purpose: GraphViz Java API
+ * <dt>Purpose: lab1.GraphViz Java API
  * <dd>
  * <p>
  * <dt>Description:
@@ -42,11 +42,11 @@ import java.io.OutputStreamWriter;
  * <dt>Example usage:
  * <dd>
  * <pre>
- *    GraphViz gv = new GraphViz();
- *    gv.addln(gv.start_graph());
+ *    lab1.GraphViz gv = new lab1.GraphViz();
+ *    gv.addln(gv.startGraph());
  *    gv.addln("A -> B;");
  *    gv.addln("A -> C;");
- *    gv.addln(gv.end_graph());
+ *    gv.addln(gv.endGraph());
  *    System.out.println(gv.getDotSource());
  *
  *    String type = "gif";
@@ -65,14 +65,14 @@ public class GraphViz {
    * The dir. where temporary files will be created.
    */
   //private static String TEMP_DIR = "/tmp"; // Linux
-  private static String TEMP_DIR = System.getProperty("user.home")
+  private final static String TEMP_DIR = System.getProperty("user.home")
                                     + "\\AppData\\Local\\Temp"; // Windows
 
   /**
    * Where is your dot program located? It will be called externally.
    */
   // private static String DOT = "/usr/bin/dot"; // Linux
-  private static String DOT = "dot.exe"; // Windows
+  private final static String DOT = "dot.exe"; // Windows
 
   /**
    * The source of the graph written in dot language.
@@ -80,7 +80,7 @@ public class GraphViz {
   private StringBuilder graph = new StringBuilder();
 
   /**
-   * Constructor: creates a new GraphViz object that will contain
+   * Constructor: creates a new lab1.GraphViz object that will contain
    * a graph.
    */
   public GraphViz() {
@@ -130,14 +130,14 @@ public class GraphViz {
     try {
       dot = writeDotSourceToFile(dotSource);
       if (dot != null) {
-        imgStream = get_img_stream(dot, type);
+        imgStream = getImgStream(dot, type);
         if (!dot.delete()) {
           System.err.println("Warning: " + dot.getAbsolutePath() + " could not be deleted!");
         }
         return imgStream;
       }
       return null;
-    } catch (java.io.IOException ioe) {
+    } catch (IOException ioe) {
       return null;
     }
   }
@@ -164,7 +164,7 @@ public class GraphViz {
   public int writeGraphToFile(byte[] img, File to) {
     try (FileOutputStream fos = new FileOutputStream(to)) {
       fos.write(img);
-    } catch (java.io.IOException ioe) {
+    } catch (IOException ioe) {
       ioe.printStackTrace();
       return -1;
     }
@@ -179,7 +179,7 @@ public class GraphViz {
    * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
    * @return The image of the graph in .gif format.
    */
-  private byte[] get_img_stream(File dot, String type) {
+  private byte[] getImgStream(File dot, String type) {
     File img;
     byte[] imgStream = null;
 
@@ -201,12 +201,12 @@ public class GraphViz {
       if (!img.delete()) {
         System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
       }
-    } catch (java.io.IOException ioe) {
+    } catch (IOException ioe) {
       System.err.println("Error:    in I/O processing of tempfile in dir "
                           + GraphViz.TEMP_DIR + System.lineSeparator());
       System.err.println("       or in calling external command");
       ioe.printStackTrace();
-    } catch (java.lang.InterruptedException ie) {
+    } catch (InterruptedException ie) {
       System.err.println("Error: the execution of the external program was interrupted");
       ie.printStackTrace();
     }
@@ -221,7 +221,7 @@ public class GraphViz {
    * @param str Source of the graph (in dot language).
    * @return The file (as a File object) that contains the source of the graph.
    */
-  public File writeDotSourceToFile(String str) throws java.io.IOException {
+  public File writeDotSourceToFile(String str) throws IOException {
     File temp;
     temp = File.createTempFile("graph_", ".dot.tmp", new File(GraphViz.TEMP_DIR));
     try (OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(temp), "UTF-8")) {
@@ -238,7 +238,7 @@ public class GraphViz {
    *
    * @return A string to open a graph.
    */
-  public String start_graph() {
+  public String startGraph() {
     return "digraph adjGraph {";
   }
 
@@ -247,7 +247,7 @@ public class GraphViz {
    *
    * @return A string to close a graph.
    */
-  public String end_graph() {
+  public String endGraph() {
     return "}";
   }
 
@@ -270,11 +270,11 @@ public class GraphViz {
       }
       br.close();
       dis.close();
-    } catch (Exception e) {
+    } catch (IOException e) {
       System.err.println("Error: " + e.getMessage());
     }
 
     this.graph = sb;
   }
 
-} // end of class GraphViz
+} // end of class lab1.GraphViz
