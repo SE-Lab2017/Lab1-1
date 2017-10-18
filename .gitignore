@@ -49,3 +49,8 @@ crashlytics-build.properties
 fabric.properties
 
 /.idea/codeStyleSettings.xml
+
+# for this project
+.idea/
+*.iml
+bin/
