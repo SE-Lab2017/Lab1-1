@@ -22,7 +22,13 @@
  ******************************************************************************
  */
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 
 /**
  * <dl>
@@ -58,7 +64,8 @@ public class GraphViz {
    * The dir. where temporary files will be created.
    */
   //private static String TEMP_DIR = "/tmp"; // Linux
-  private static String TEMP_DIR = System.getProperty("user.home") + "\\AppData\\Local\\Temp"; // Windows
+  private static String TEMP_DIR = System.getProperty("user.home")
+                                    + "\\AppData\\Local\\Temp"; // Windows
 
   /**
    * Where is your dot program located? It will be called externally.
@@ -111,21 +118,22 @@ public class GraphViz {
   /**
    * Returns the graph as an image in binary format.
    *
-   * @param dot_source Source of the graph to be drawn.
-   * @param type       Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
+   * @param dotSource Source of the graph to be drawn.
+   * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
    * @return A byte array containing the image of the graph.
    */
-  public byte[] getGraph(String dot_source, String type) {
+  public byte[] getGraph(String dotSource, String type) {
     File dot;
-    byte[] img_stream = null;
+    byte[] imgStream = null;
 
     try {
-      dot = writeDotSourceToFile(dot_source);
+      dot = writeDotSourceToFile(dotSource);
       if (dot != null) {
-        img_stream = get_img_stream(dot, type);
-        if (!dot.delete())
+        imgStream = get_img_stream(dot, type);
+        if (!dot.delete()) {
           System.err.println("Warning: " + dot.getAbsolutePath() + " could not be deleted!");
-        return img_stream;
+        }
+        return imgStream;
       }
       return null;
     } catch (java.io.IOException ioe) {
@@ -174,7 +182,7 @@ public class GraphViz {
    */
   private byte[] get_img_stream(File dot, String type) {
     File img;
-    byte[] img_stream = null;
+    byte[] imgStream = null;
 
     try {
       img = File.createTempFile("graph_", "." + type, new File(GraphViz.TEMP_DIR));
@@ -187,15 +195,18 @@ public class GraphViz {
       p.waitFor();
 
       FileInputStream in = new FileInputStream(img.getAbsolutePath());
-      img_stream = new byte[in.available()];
-      in.read(img_stream);
+      imgStream = new byte[in.available()];
+      in.read(imgStream);
       // Close it if we need to
-      if (in != null) in.close();
-
-      if (!img.delete())
+      if (in != null) {
+        in.close();
+      }
+      if (!img.delete()) {
         System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
+      }
     } catch (java.io.IOException ioe) {
-      System.err.println("Error:    in I/O processing of tempfile in dir " + GraphViz.TEMP_DIR + "\n");
+      System.err.println("Error:    in I/O processing of tempfile in dir "
+                          + GraphViz.TEMP_DIR + System.lineSeparator());
       System.err.println("       or in calling external command");
       ioe.printStackTrace();
     } catch (java.lang.InterruptedException ie) {
@@ -203,7 +214,7 @@ public class GraphViz {
       ie.printStackTrace();
     }
 
-    return img_stream;
+    return imgStream;
   }
 
   /**
@@ -233,7 +244,7 @@ public class GraphViz {
    * @return A string to open a graph.
    */
   public String start_graph() {
-    return "digraph G {";
+    return "digraph adjGraph {";
   }
 
   /**

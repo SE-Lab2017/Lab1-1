@@ -8,20 +8,21 @@ import java.util.Stack;
 public class AdjGraph {
   private static final int MAX = 100;
   private VertexNode[] vexList;
-  private int n;
-  private int[] d, p;
-  private boolean[] s;
+  private int vertexNum;
+  private int[] dis;
+  private int[] parentNode;
+  private boolean[] isVisited;
   private int[] edgeNum;
   private HashMap<String, Integer> wordsMap;
   private StringBuilder randomPathBuilder;
 
   public AdjGraph() {
     vexList = null;
-    n = 0;
+    vertexNum = 0;
     // e = 0;
-    d = new int[MAX];
-    s = new boolean[MAX];
-    p = new int[MAX];
+    dis = new int[MAX];
+    isVisited = new boolean[MAX];
+    parentNode = new int[MAX];
     wordsMap = new HashMap<String, Integer>();
     randomPathBuilder = new StringBuilder();
     edgeNum = new int[MAX];
@@ -40,15 +41,15 @@ public class AdjGraph {
   }
 
   public int getNumOfVertex() {
-    return n;
+    return vertexNum;
   }
 
   public int getDistanceOfPath(String end) {
-    return d[wordsMap.get(end)];
+    return dis[wordsMap.get(end)];
   }
 
   public boolean isEmpty() {
-    return n == 0;
+    return vertexNum == 0;
   }
 
   public boolean containsNode(String vexData) {
@@ -58,20 +59,20 @@ public class AdjGraph {
   public void insNode(String vexData) {
     if (!wordsMap.containsKey(vexData)) {
       VertexNode[] newVexList;
-      newVexList = new VertexNode[n + 2];
-      for (int i = 1; i <= n + 1; i++) {
+      newVexList = new VertexNode[vertexNum + 2];
+      for (int i = 1; i <= vertexNum + 1; i++) {
         newVexList[i] = new VertexNode();
       }
-      for (int i = 1; i <= n; i++) {
+      for (int i = 1; i <= vertexNum; i++) {
         newVexList[i].data = vexList[i].data;
         newVexList[i].firstEdge = vexList[i].firstEdge;
 
       }
-      newVexList[n + 1].data = vexData;
-      newVexList[n + 1].firstEdge = null;
+      newVexList[vertexNum + 1].data = vexData;
+      newVexList[vertexNum + 1].firstEdge = null;
       vexList = newVexList;
-      wordsMap.put(vexData, n + 1);
-      n++;
+      wordsMap.put(vexData, vertexNum + 1);
+      vertexNum++;
     }
   }
 
@@ -96,15 +97,18 @@ public class AdjGraph {
         break;
       }
     }
-    if (p == null)
+    if (p == null) {
       setEdge(1, head, tail);
+    }
   }
 
   public String queryBridgeWords(String word1, String word2) {
     // query bridge words of two words
-    if (!wordsMap.containsKey(word1) || !wordsMap.containsKey(word2))
+    if (!wordsMap.containsKey(word1) || !wordsMap.containsKey(word2)) {
       return null;
-    EdgeNode p, q;
+    }
+    EdgeNode p;
+    EdgeNode q;
     int mid;
     int start = wordsMap.get(word1);
     int end = wordsMap.get(word2);
@@ -118,7 +122,9 @@ public class AdjGraph {
       }
     }
     String tmp = builder.toString();
-    if (tmp.length() > 0) tmp = tmp.substring(0, tmp.length() - 1);
+    if (tmp.length() > 0) {
+      tmp = tmp.substring(0, tmp.length() - 1);
+    }
     return tmp;
   }
 
@@ -150,26 +156,29 @@ public class AdjGraph {
   public String calcShortestPath(String word1, String word2) {
     EdgeNode ptr;
     Stack<String> tmp = new Stack<String>();
-    int i, sum = 0, k, w;
+    int i;
+    int sum;
+    int k;
+    int w;
     int start = wordsMap.get(word1);
     int end = wordsMap.get(word2);
-    for (i = 1; i <= n; i++) {
-      d[i] = 0x7fffffff;
-      s[i] = false;
-      p[i] = start;
+    for (i = 1; i <= vertexNum; i++) {
+      dis[i] = 0x7fffffff;
+      isVisited[i] = false;
+      parentNode[i] = start;
     }
-    p[start] = 0;
+    parentNode[start] = 0;
     for (ptr = vexList[start].firstEdge; ptr != null; ptr = ptr.next) {
-      d[ptr.adjVex] = ptr.cost;
+      dis[ptr.adjVex] = ptr.cost;
     }
-    s[start] = true;
-    for (i = 1; i < n; i++) {
+    isVisited[start] = true;
+    for (i = 1; i < vertexNum; i++) {
       w = getVexOfMinCost();
       if (w == end) {
         StringBuilder builder = new StringBuilder();
         k = w;
         do {
-          k = p[k];
+          k = parentNode[k];
           tmp.push(vexList[k].data);
         } while (k != start);
         while (!tmp.isEmpty()) {
@@ -178,13 +187,13 @@ public class AdjGraph {
         builder.append(vexList[end].data);
         return builder.toString();
       }
-      s[w] = true;
+      isVisited[w] = true;
       for (ptr = vexList[w].firstEdge; ptr != null; ptr = ptr.next) {
-        if (!s[ptr.adjVex]) {
-          sum = d[w] + ptr.cost;
-          if (sum < d[ptr.adjVex] && d[w] < 0x7fffffff) {
-            d[ptr.adjVex] = sum;
-            p[ptr.adjVex] = w;
+        if (!isVisited[ptr.adjVex]) {
+          sum = dis[w] + ptr.cost;
+          if (sum < dis[ptr.adjVex] && dis[w] < 0x7fffffff) {
+            dis[ptr.adjVex] = sum;
+            parentNode[ptr.adjVex] = w;
           }
         }
       }
@@ -196,42 +205,45 @@ public class AdjGraph {
   public String[] calcShortestPath(String word) {
     EdgeNode ptr;
     // Stack<String> path = new Stack<String>();
-    int i, sum = 0, k, w;
+    int i;
+    int sum;
+    int k;
+    int w;
     int start = wordsMap.get(word);
-    for (i = 1; i <= n; i++) {
-      d[i] = 0x7fffffff;
-      s[i] = false;
-      p[i] = start;
+    for (i = 1; i <= vertexNum; i++) {
+      dis[i] = 0x7fffffff;
+      isVisited[i] = false;
+      parentNode[i] = start;
     }
-    p[start] = 0;
+    parentNode[start] = 0;
     for (ptr = vexList[start].firstEdge; ptr != null; ptr = ptr.next) {
-      d[ptr.adjVex] = ptr.cost;
+      dis[ptr.adjVex] = ptr.cost;
     }
-    s[start] = true;
-    for (i = 1; i < n; i++) {
+    isVisited[start] = true;
+    for (i = 1; i < vertexNum; i++) {
       w = getVexOfMinCost();
-      s[w] = true;
+      isVisited[w] = true;
       for (ptr = vexList[w].firstEdge; ptr != null; ptr = ptr.next) {
-        if (!s[ptr.adjVex]) {
-          sum = d[w] + ptr.cost;
-          if (sum < d[ptr.adjVex] && d[w] < 0x7fffffff) {
-            d[ptr.adjVex] = sum;
-            p[ptr.adjVex] = w;
+        if (!isVisited[ptr.adjVex]) {
+          sum = dis[w] + ptr.cost;
+          if (sum < dis[ptr.adjVex] && dis[w] < 0x7fffffff) {
+            dis[ptr.adjVex] = sum;
+            parentNode[ptr.adjVex] = w;
           }
         }
       }
     }
-    String[] paths = new String[n + 1];
-    StringBuilder[] builder = new StringBuilder[n + 1];
-    for (i = 1; i <= n; i++) {
+    String[] paths = new String[vertexNum + 1];
+    StringBuilder[] builder = new StringBuilder[vertexNum + 1];
+    for (i = 1; i <= vertexNum; i++) {
       builder[i] = new StringBuilder();
     }
-    for (i = 1; i <= n; i++) {
+    for (i = 1; i <= vertexNum; i++) {
       if (i != start) {
         k = i;
         Stack<String> tmp = new Stack<String>();
         do {
-          k = p[k];
+          k = parentNode[k];
           tmp.push(vexList[k].data);
         } while (k != start);
 
@@ -246,28 +258,31 @@ public class AdjGraph {
   }
 
   private int getVexOfMinCost() {
-    int temp = 0x7fffffff, w = 0;
-    for (int i = 1; i <= n; i++)
-      if (!s[i] && d[i] < temp) {
-        temp = d[i];
+    int temp = 0x7fffffff;
+    int w = 0;
+    for (int i = 1; i <= vertexNum; i++) {
+      if (!isVisited[i] && dis[i] < temp) {
+        temp = dis[i];
         w = i;
       }
+    }
     return w;
   }
 
   public String randomWalk() throws FileNotFoundException {
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= vertexNum; i++) {
       for (EdgeNode p = vexList[i].firstEdge; p != null; p = p.next) {
         p.walkFlag = false;
       }
     }
     randomPathBuilder.delete(0, randomPathBuilder.length());
-    int start = (int) (Math.random() * n + 1);
+    int start = (int) (Math.random() * vertexNum + 1);
     randomPathBuilder.append(vexList[start].data).append(' ');
     randomWalk(start);
     String randomPath = randomPathBuilder.toString();
     randomPath = randomPath.substring(0, randomPath.length() - 1);
-    File f = new File(System.getProperty("user.home") + "\\AppData\\Local\\Temp" + "randomwalk.txt");
+    File f = new File(System.getProperty("user.home")
+        + "\\AppData\\Local\\Temp" + "randomwalk.txt");
     PrintStream fps = new PrintStream(f);
     fps.print(randomPath);
     fps.close();
@@ -276,7 +291,8 @@ public class AdjGraph {
 
   private void randomWalk(int start) {
     EdgeNode p;
-    int i = edgeNum[start], j = 1;
+    int i = edgeNum[start];
+    int j = 1;
     if (i != 0) {
       int flag = (int) (Math.random() * i + 1);
       for (p = vexList[start].firstEdge; p != null; p = p.next) {
