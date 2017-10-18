@@ -430,4 +430,3 @@ class RandomFrame extends JFrame
       //pack();
    }
 }
-

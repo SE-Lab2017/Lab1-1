@@ -114,7 +114,7 @@ public class AdjGraph {
             mid = p.adjVex;
             for (q = vexList[mid].firstEdge; q != null; q = q.next) {
                 if (q.adjVex == end) {
-                    builder.append(vexList[mid].data+" ");
+                    builder.append(vexList[mid].data).append(' ');
                 }
             }
         }
@@ -131,13 +131,13 @@ public class AdjGraph {
         while (words.hasNext()) {
             curWord = words.next().toLowerCase();
             if (preWord != null) {
-                builder.append(preWord + " ");
+                builder.append(preWord).append(' ');
                 if (wordsMap.containsKey(preWord) && wordsMap.containsKey(curWord)) {
                     String bridgeWord = queryBridgeWords(preWord, curWord);
                     if (bridgeWord != null && !bridgeWord.equals("")) {
                         String[] tmp = bridgeWord.split(" ");
                         int i = (int) (Math.random() * tmp.length);
-                        builder.append(tmp[i] + " ");
+                        builder.append(tmp[i]).append(' ');
                     }      
                 }
             }
@@ -145,8 +145,7 @@ public class AdjGraph {
         }
         builder.append(curWord);
         words.close();
-        String newText = builder.toString();
-        return newText;
+        return builder.toString();
     }
 
     public String calcShortestPath(String word1, String word2) {
@@ -175,7 +174,7 @@ public class AdjGraph {
                     tmp.push(vexList[k].data);
                 } while (k != start);
                 while (!tmp.isEmpty()) {
-                    builder.append(tmp.pop() + " ");
+                    builder.append(tmp.pop()).append(' ');
                 }
                 builder.append(vexList[end].data);
                 return builder.toString();
@@ -226,7 +225,6 @@ public class AdjGraph {
         String[] paths = new String[n + 1];
         StringBuilder[] builder = new StringBuilder[n + 1];
         for (i = 1; i <= n; i++) {
-            paths[i] = new String();
             builder[i] = new StringBuilder();
         }
         for (i = 1; i <= n; i++) {
@@ -239,14 +237,13 @@ public class AdjGraph {
                 } while (k != start);
 
                 while (!tmp.isEmpty()) {
-                    builder[i].append(tmp.pop() + " ");
+                    builder[i].append(tmp.pop()).append(' ');
                 }
                 builder[i].append(vexList[i].data);
             }
             paths[i] = builder[i].toString();
         }
         return paths;
-
     }
 
     private int getVexOfMinCost() {
@@ -267,7 +264,7 @@ public class AdjGraph {
         }
         randomPathBuilder.delete(0, randomPathBuilder.length());
         int start = (int) (Math.random() * n + 1);
-        randomPathBuilder.append(vexList[start].data + " ");
+        randomPathBuilder.append(vexList[start].data).append(' ');
         randomWalk(start);
         String randomPath = randomPathBuilder.toString();
         randomPath = randomPath.substring(0, randomPath.length() - 1);
@@ -286,11 +283,11 @@ public class AdjGraph {
             for (p = vexList[start].firstEdge; p != null; p = p.next) {
                 if (j == flag) {
                     if (p.walkFlag) {
-                        randomPathBuilder.append(vexList[p.adjVex].data + " ");
+                        randomPathBuilder.append(vexList[p.adjVex].data).append(' ');
                         return;
                     }
                     p.walkFlag = true;
-                    randomPathBuilder.append(vexList[p.adjVex].data + " ");
+                    randomPathBuilder.append(vexList[p.adjVex].data).append(' ');
                     randomWalk(p.adjVex);
                 }
                 j++;

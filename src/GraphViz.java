@@ -109,14 +109,14 @@ public class GraphViz
     * Adds a string to the graph's source (with newline).
     */
    public void addln(String line) {
-      graph.append(line + "\n");
+      graph.append(line).append(System.lineSeparator());
    }
 
 /**
     * Adds a newline to the graph's source.
     */
    public void addln() {
-      graph.append('\n');
+      graph.append(System.lineSeparator());
    }
 
 /**
@@ -280,6 +280,3 @@ return img_stream;   }
    }
    
 } // end of class GraphViz
-
-
- 
