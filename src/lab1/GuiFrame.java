@@ -63,7 +63,7 @@ class GuiFrame extends JFrame {
         ImageViewer imageViewer = null;
         try {
           imageViewer = new ImageViewer(System.getProperty("user.home")
-                                        + "\\AppData\\Local\\Temp" + "\\out.gif");
+                                        + "\\Desktop" + "\\out.gif");
         } catch (IOException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();

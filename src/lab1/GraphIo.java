@@ -114,7 +114,7 @@ public class GraphIo {
     System.out.println(gv.getDotSource());
     String type = "gif";
     File out = new File(System.getProperty("user.home")
-                        + "\\AppData\\Local\\Temp" + "\\out." + type); // Windows
+                        + "\\Desktop" + "\\out." + type); // Windows
     gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type), out);
   }
 }

@@ -284,7 +284,7 @@ public class AdjGraph {
     String randomPath = randomPathBuilder.toString();
     randomPath = randomPath.substring(0, randomPath.length() - 1);
     File f = new File(System.getProperty("user.home")
-        + "\\AppData\\Local\\Temp" + "randomwalk.txt");
+        + "\\Desktop" + "\\randomwalk.txt");
     try (PrintStream fps = new PrintStream(f, "UTF-8")) {
       fps.print(randomPath);
     } catch (UnsupportedEncodingException e) {

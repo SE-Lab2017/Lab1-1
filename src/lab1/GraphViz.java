@@ -66,7 +66,7 @@ public class GraphViz {
    */
   //private static String TEMP_DIR = "/tmp"; // Linux
   private final static String TEMP_DIR = System.getProperty("user.home")
-                                    + "\\AppData\\Local\\Temp"; // Windows
+                                    + "\\Desktop"; // Windows
 
   /**
    * Where is your dot program located? It will be called externally.
