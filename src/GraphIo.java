@@ -7,7 +7,7 @@ public class GraphIo {
   String fileUrl;
 
   public void read() throws FileNotFoundException {
-    Scanner scan = new Scanner(new File(fileUrl));
+    Scanner scan = new Scanner(new File(fileUrl), "UTF-8");
     StringBuilder builder = new StringBuilder();
     while (scan.hasNext()) {
       String str = scan.nextLine();

@@ -27,8 +27,9 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /**
  * <dl>
@@ -161,10 +162,8 @@ public class GraphViz {
    * @return Success: 1, Failure: -1
    */
   public int writeGraphToFile(byte[] img, File to) {
-    try {
-      FileOutputStream fos = new FileOutputStream(to);
+    try (FileOutputStream fos = new FileOutputStream(to)) {
       fos.write(img);
-      fos.close();
     } catch (java.io.IOException ioe) {
       ioe.printStackTrace();
       return -1;
@@ -194,13 +193,11 @@ public class GraphViz {
 
       p.waitFor();
 
-      FileInputStream in = new FileInputStream(img.getAbsolutePath());
-      imgStream = new byte[in.available()];
-      in.read(imgStream);
-      // Close it if we need to
-      if (in != null) {
-        in.close();
+      try (FileInputStream in = new FileInputStream(img.getAbsolutePath())) {
+        imgStream = new byte[in.available()];
+        in.read(imgStream);
       }
+
       if (!img.delete()) {
         System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
       }
@@ -226,12 +223,10 @@ public class GraphViz {
    */
   public File writeDotSourceToFile(String str) throws java.io.IOException {
     File temp;
-    try {
-      temp = File.createTempFile("graph_", ".dot.tmp", new File(GraphViz.TEMP_DIR));
-      FileWriter fout = new FileWriter(temp);
+    temp = File.createTempFile("graph_", ".dot.tmp", new File(GraphViz.TEMP_DIR));
+    try (OutputStreamWriter fout = new OutputStreamWriter(new FileOutputStream(temp), "UTF-8")) {
       fout.write(str);
-      fout.close();
-    } catch (Exception e) {
+    } catch (IOException e) {
       System.err.println("Error: I/O error while writing the dot source to temp file!");
       return null;
     }
@@ -268,11 +263,12 @@ public class GraphViz {
     try {
       FileInputStream fis = new FileInputStream(input);
       DataInputStream dis = new DataInputStream(fis);
-      BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+      BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
       String line;
       while ((line = br.readLine()) != null) {
         sb.append(line);
       }
+      br.close();
       dis.close();
     } catch (Exception e) {
       System.err.println("Error: " + e.getMessage());

@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
@@ -283,9 +284,11 @@ public class AdjGraph {
     randomPath = randomPath.substring(0, randomPath.length() - 1);
     File f = new File(System.getProperty("user.home")
         + "\\AppData\\Local\\Temp" + "randomwalk.txt");
-    PrintStream fps = new PrintStream(f);
-    fps.print(randomPath);
-    fps.close();
+    try (PrintStream fps = new PrintStream(f, "UTF-8")) {
+      fps.print(randomPath);
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
     return randomPath;
   }
 
